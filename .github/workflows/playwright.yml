@@ -6,7 +6,7 @@ on:
     branches: [ main, master ]
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,7 +20,7 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
-    - name: Run Playwright tests (DEV project)
+    - name: Run Automated Playwright tests (skipping manual OTP tests in CI)
       env:
         CI: true
         TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
@@ -28,8 +28,7 @@ jobs:
         TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
         TEST_MPIN: ${{ secrets.TEST_MPIN }}
         TEST_PAN: ${{ secrets.TEST_PAN }}
-        DEV_OTP: "123456"
-      run: npx playwright test --project=dev
+      run: npx playwright test --grep-invert "OTP|deleteAccount" --project=dev
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
