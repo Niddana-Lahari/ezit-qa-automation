@@ -156,7 +156,6 @@ test.describe('Services Module - Raise a Query', () => {
       if (await closeBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
         await closeBtn.click();
       }
-    }
 
       // 11. Choose 'WorldLine Option' BY NAME, then Continue
       const worldlineRadio = page.getByRole('radio', { name: 'WorldLine Option' });
