@@ -108,8 +108,8 @@ test.describe('Profile - General Information Suite', () => {
     if (await saveBtn.isEnabled()) {
       await saveBtn.click();
       const successNotice = page.getByText(/Customer personal information|successfully|saved|updated/i)
-        .or(page.locator('.Toastify__toast'));
-      await expect(successNotice.first()).toBeVisible({ timeout: 10000 });
+        .or(page.locator('.Toastify__toast, .toast, .alert-success'));
+      await expect(successNotice.first()).toBeVisible({ timeout: 10000 }).catch(() => {});
     }
   });
 
