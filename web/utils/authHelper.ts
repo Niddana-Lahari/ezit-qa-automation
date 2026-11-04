@@ -24,6 +24,14 @@ export async function loginAsCustomer(page: Page, credentials: LoginCredentials)
 
   // Click login button
   await loginBtn.click();
+
+  // Dismiss any push notification modal or welcome popups that intercept clicks on Dev
+  const dismissModal = page.getByRole('button', { name: /No Thanks|Dismiss|Close|Not Now/i }).or(
+    page.locator('.modal-footer button, button.btn-close')
+  );
+  if (await dismissModal.first().isVisible({ timeout: 4000 }).catch(() => false)) {
+    await dismissModal.first().click().catch(() => {});
+  }
 }
 
 /**

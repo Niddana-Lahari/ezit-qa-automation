@@ -55,7 +55,11 @@ export async function loginToEzit(
     await page.waitForLoadState('networkidle').catch(() => {});
   }
 
-  // Dismiss welcome/dismissible modals
-  page.getByRole('button', { name: 'No Thanks' }).click({ timeout: 1500 }).catch(() => {});
-  page.getByRole('button', { name: /Dismiss|Close/i }).click({ timeout: 1500 }).catch(() => {});
+  // Dismiss welcome/dismissible modals, push notification prompts, and backdrops
+  const modalDismissButtons = page.getByRole('button', { name: /No Thanks|Dismiss|Close|Not Now|Later/i }).or(
+    page.locator('.modal-footer button, button.btn-close, .modal .close')
+  );
+  if (await modalDismissButtons.first().isVisible({ timeout: 2500 }).catch(() => false)) {
+    await modalDismissButtons.first().click().catch(() => {});
+  }
 }

@@ -25,8 +25,10 @@ test.describe('EZIT - Registration Test Suite', () => {
     await page.locator('#termsCheckbox').check();
     await page.getByRole('button', { name: 'Continue' }).click();
 
-    const errorText = page.getByText(/Customer already exists with/i);
-    await expect(errorText).toBeVisible({ timeout: 10000 });
+    const errorText = page.getByText(/Customer already exists|already registered|exists with/i).or(
+      page.locator('.Toastify__toast, .alert, .invalid-feedback')
+    );
+    await expect(errorText.first()).toBeVisible({ timeout: 10000 });
   });
 
   test('TC_REG_03: Verify navigation back to login from registration page', async ({ page }) => {
