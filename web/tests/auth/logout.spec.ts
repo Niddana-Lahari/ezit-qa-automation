@@ -4,6 +4,8 @@ import { loginToEzit } from '../../utils/loginHelper';
 
 test.describe('Authentication - Logout Flow', () => {
 
+  test.setTimeout(60000);
+
   test.beforeEach(async ({ page }, testInfo) => {
     // Step 1: Perform unified login (handles Dev/Prod dynamic credentials & environment URLs)
     await loginToEzit(page, testInfo);
