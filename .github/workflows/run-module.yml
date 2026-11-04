@@ -1,0 +1,123 @@
+name: EZIT Module Automation Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      module:
+        description: 'Module to Execute'
+        required: true
+        default: 'login'
+        type: choice
+        options:
+          - 'register'
+          - 'login'
+          - 'delete_account'
+          - 'secure_vault'
+          - 'docai'
+          - 'coverage'
+          - 'asset_creation'
+          - 'appliance_creation'
+          - 'liability_creation'
+          - 'transport_creation'
+          - 'billpay'
+          - 'profile'
+          - 'logout'
+      environment:
+        description: 'Target Environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - 'dev'
+          - 'prod'
+
+jobs:
+  run-module-test:
+    name: "Run: ${{ github.event.inputs.module }} on ${{ github.event.inputs.environment }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Execute Module Test
+        env:
+          CI: true
+          TEST_USER_NAME: ${{ secrets.TEST_USER_NAME }}
+          TEST_MOBILE: ${{ secrets.TEST_MOBILE }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          TEST_MPIN: ${{ secrets.TEST_MPIN }}
+        run: |
+          MODULE="${{ github.event.inputs.module }}"
+          ENV="${{ github.event.inputs.environment || 'dev' }}"
+          echo "Executing module: $MODULE on environment: $ENV"
+
+          case "$MODULE" in
+            "register")
+              npx playwright test tests/register/register.spec.ts --project=$ENV
+              ;;
+            "login")
+              npx playwright test tests/auth/login.spec.ts --project=$ENV
+              ;;
+            "delete_account")
+              npx playwright test tests/profile/deleteAccount.spec.ts --project=$ENV
+              ;;
+            "secure_vault")
+              npx playwright test tests/onboarding/steps_vault.spec.ts --project=$ENV
+              ;;
+            "docai")
+              npx playwright test tests/docai/docai.spec.ts --project=$ENV
+              ;;
+            "coverage")
+              npx playwright test tests/coverage/coverage.spec.ts --project=$ENV
+              ;;
+            "asset_creation")
+              npx playwright test tests/vault/assetCreation.spec.ts --project=$ENV
+              ;;
+            "appliance_creation")
+              npx playwright test tests/vault/applianceCreation.spec.ts --project=$ENV
+              ;;
+            "liability_creation")
+              npx playwright test tests/vault/liabilityCreation.spec.ts --project=$ENV
+              ;;
+            "transport_creation")
+              npx playwright test tests/vault/transportCreation.spec.ts --project=$ENV
+              ;;
+            "billpay")
+              npx playwright test tests/billpay/billPay.spec.ts --project=$ENV
+              ;;
+            "profile")
+              npx playwright test tests/profile/generalInformation.spec.ts --project=$ENV
+              ;;
+            "logout")
+              npx playwright test tests/auth/logout.spec.ts --project=$ENV
+              ;;
+            *)
+              echo "Unknown module $MODULE"
+              exit 1
+              ;;
+          esac
+
+      - name: Upload Test Report Artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ github.event.inputs.module }}
+          path: web/playwright-report/
+          retention-days: 14
