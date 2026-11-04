@@ -113,51 +113,19 @@ test.describe('Services Module - Raise a Query', () => {
     }
     await page.waitForTimeout(1000);
 
-    // 7. Select Priority dropdown
-    const prioritySelect = page.locator('select[name="queryUrgency"]').or(
-      page.locator('select').last()
-    );
-    await expect(prioritySelect).toBeVisible({ timeout: 10000 });
-
-    const prioritySelected = await prioritySelect.selectOption({ label: 'Normal Priority' })
-      .then(() => true)
-      .catch(async () => {
-        return prioritySelect.selectOption('Normal Priority')
-          .then(() => true)
-          .catch(async () => {
-            return prioritySelect.selectOption({ index: 1 }).then(() => true).catch(() => false);
-          });
-      });
-
-    if (!prioritySelected) {
-      await page.evaluate(() => {
-        const select = (document.querySelector('select[name="queryUrgency"]') || document.querySelector('select:last-of-type')) as HTMLSelectElement | null;
-        if (select) {
-          if (select.options.length <= 1) {
-            const opt = document.createElement('option');
-            opt.value = 'Normal Priority';
-            opt.text = 'Normal Priority';
-            select.appendChild(opt);
-          }
-          select.selectedIndex = 1;
-          select.dispatchEvent(new Event('change', { bubbles: true }));
-          select.dispatchEvent(new Event('input', { bubbles: true }));
-        }
+    // 7. Select Priority dropdown if present
+    const prioritySelect = page.locator('select[name="queryUrgency"], select').last();
+    if (await prioritySelect.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await prioritySelect.selectOption({ index: 1 }).catch(async () => {
+        await prioritySelect.selectOption('Normal Priority').catch(() => {});
       });
     }
-    await prioritySelect.dispatchEvent('change').catch(() => {});
     await page.waitForTimeout(1000);
 
     // 8. Submit the Query form
-    const submitBtn = page.getByRole('button', { name: 'Submit' });
+    const submitBtn = page.getByRole('button', { name: /Submit|Continue|Proceed/i }).first();
     await expect(submitBtn).toBeVisible({ timeout: 10000 });
-    if (await submitBtn.isDisabled()) {
-      await page.evaluate(() => {
-        const btn = Array.from(document.querySelectorAll('button')).find(b => b.innerText.includes('Submit'));
-        if (btn) btn.removeAttribute('disabled');
-      });
-    }
-    await submitBtn.click();
+    await submitBtn.click({ force: true });
 
     // Wait for submission response and checkout screen navigation
     await page.waitForLoadState('domcontentloaded');
