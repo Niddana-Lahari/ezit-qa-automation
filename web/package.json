@@ -1,0 +1,31 @@
+{
+  "name": "ezit-qa-automation",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "playwright test --project=dev",
+    "test:dev": "playwright test --project=dev",
+    "test:prod": "playwright test --project=prod",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niddana-Lahari/ezit-qa-automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Niddana-Lahari/ezit-qa-automation/issues"
+  },
+  "homepage": "https://github.com/Niddana-Lahari/ezit-qa-automation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^26.6.5",
+    "dotenv": "^16.6.1",
+    "typescript": "^5.9.3"
+  }
+}

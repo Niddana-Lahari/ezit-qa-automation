@@ -19,7 +19,8 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
-coverage
+/coverage/
+!web/tests/coverage/
 *.lcov
 
 # nyc test coverage
@@ -147,3 +148,15 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+.cache/
+.auth/
+auth.json
+*.auth.json
+.env
+.env*.local
+

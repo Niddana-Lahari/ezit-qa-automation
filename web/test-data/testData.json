@@ -1,0 +1,42 @@
+{
+  "vault": {
+    "asset": {
+      "organization": "SBI",
+      "valuationAmount": "50000",
+      "description": "Primary Fixed Deposit Asset"
+    },
+    "liability": {
+      "organization": "SBI",
+      "outstandingValue": "5678"
+    },
+    "appliance": {
+      "name": "LG Refrigerator",
+      "brand": "LG",
+      "invoiceAmount": "45000"
+    },
+    "transport": {
+      "model": "Maruti Swift",
+      "brand": "Maruti",
+      "issuerName": "RTO",
+      "premiumAmount": "67890"
+    },
+    "nominee": {
+      "fullName": "Test Nominee",
+      "relationship": "4",
+      "mobile": "9876543211"
+    }
+  },
+  "services": {
+    "consultation": {
+      "category": "Accounting-Taxation",
+      "subCategory": "Taxation",
+      "requirementNote": "Consultation request for tax planning and deductions"
+    }
+  },
+  "profile": {
+    "address": "Plot 42, Road No 10, Jubilee Hills",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "pincode": "500033"
+  }
+}
