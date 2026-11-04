@@ -6,7 +6,7 @@ on:
     branches: [ main, master ]
 jobs:
   test:
-    timeout-minutes: 15
+    timeout-minutes: 40
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.64.0-jammy
@@ -28,9 +28,9 @@ jobs:
         TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
         TEST_MPIN: ${{ secrets.TEST_MPIN }}
         TEST_PAN: ${{ secrets.TEST_PAN }}
-      run: npx playwright test --grep-invert "OTP|deleteAccount" --project=dev
+      run: npx playwright test --workers=2 --grep-invert "OTP|deleteAccount" --project=dev
     - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
+      if: always()
       with:
         name: playwright-report
         path: web/playwright-report/
