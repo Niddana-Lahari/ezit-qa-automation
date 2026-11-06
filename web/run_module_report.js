@@ -2,82 +2,59 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-// Arguments: node run_module_report.js <module> <env>
-// e.g. node run_module_report.js subscription dev
-const moduleArg = process.argv[2] || 'all';
-const envArg = process.argv[3] || 'dev';
+// Usage: node run_module_report.js <module-number-or-name> <env>
+// e.g.: node run_module_report.js 7 dev
+//       node run_module_report.js asset_creation prod
+const targetInput = process.argv[2] || 'all';
+const env = process.argv[3] || 'dev';
 
-const MODULES = {
-  subscription: {
-    name: 'Subscription Plans',
-    path: 'tests/subscription/',
-  },
-  vault: {
-    name: 'Secure Vault (Assets, Liabilities, Appliances, Transport)',
-    path: 'tests/vault/',
-  },
-  services: {
-    name: 'Services (Specialised, Consultations, Custom Request)',
-    path: 'tests/services/',
-  },
-  billpay: {
-    name: 'Bill Pay Module',
-    path: 'tests/billpay/',
-  },
-  profile: {
-    name: 'Profile & Nominees',
-    path: 'tests/profile/',
-  },
-  docai: {
-    name: 'DocAI Module',
-    path: 'tests/docai/',
-  },
-  coverage: {
-    name: 'Complementary Coverage',
-    path: 'tests/coverage/',
-  },
-  auth: {
-    name: 'Authentication (Login & Registration)',
-    path: 'tests/auth/',
-  },
-  dashboard: {
-    name: 'Home & Dashboard',
-    path: 'tests/dashboard/',
-  },
-};
+const MODULES = [
+  { id: '1', key: 'register', name: '1. Register', file: 'tests/register/register.spec.ts' },
+  { id: '2', key: 'login', name: '2. Login', file: 'tests/auth/login.spec.ts' },
+  { id: '3', key: 'delete_account', name: '3. Delete Account', file: 'tests/profile/deleteAccount.spec.ts' },
+  { id: '4', key: 'secure_vault', name: '4. Secure Vault', file: 'tests/onboarding/steps_vault.spec.ts' },
+  { id: '5', key: 'docai', name: '5. Doc AI', file: 'tests/docai/docai.spec.ts' },
+  { id: '6', key: 'coverage', name: '6. Complementary Coverage', file: 'tests/coverage/coverage.spec.ts' },
+  { id: '7', key: 'asset_creation', name: '7. Asset Creation', file: 'tests/vault/assetCreation.spec.ts' },
+  { id: '8', key: 'appliance_creation', name: '8. Appliance Creation', file: 'tests/vault/applianceCreation.spec.ts' },
+  { id: '9', key: 'liability_creation', name: '9. Liability Creation', file: 'tests/vault/liabilityCreation.spec.ts' },
+  { id: '10', key: 'transport_creation', name: '10. Transport Creation', file: 'tests/vault/transportCreation.spec.ts' },
+  { id: '11', key: 'billpay', name: '11. Bill Pay', file: 'tests/billpay/billPay.spec.ts' },
+  { id: '12', key: 'profile', name: '12. Profile', file: 'tests/profile/generalInformation.spec.ts' },
+  { id: '13', key: 'logout', name: '13. Logout', file: 'tests/zzz_logout.spec.ts' },
+];
 
-function runModule(modKey, env) {
-  const mod = MODULES[modKey];
-  if (!mod) {
-    console.error(`Unknown module: ${modKey}`);
-    console.log(`Available modules: ${Object.keys(MODULES).join(', ')}`);
-    process.exit(1);
-  }
-
-  const reportFolder = path.join(__dirname, 'reports', env, modKey);
-  console.log(`\n======================================================`);
-  console.log(` Running: ${mod.name} on [${env.toUpperCase()}]`);
-  console.log(` Report Destination: ${reportFolder}`);
-  console.log(`======================================================\n`);
-
-  // Ensure reports dir exists
+function runSingle(mod, targetEnv) {
+  const reportFolder = path.join(__dirname, 'reports', targetEnv, `${mod.id}_${mod.key}`);
   fs.mkdirSync(reportFolder, { recursive: true });
 
-  const command = `npx playwright test ${mod.path} --project=${env} --reporter=html:${reportFolder} --grep-invert "OTP|deleteAccount"`;
-  
+  console.log(`\n===============================================================`);
+  console.log(` ▶ RUNNING: ${mod.name} [${targetEnv.toUpperCase()}]`);
+  console.log(` ▶ FILE:    ${mod.file}`);
+  console.log(` ▶ REPORT:  reports/${targetEnv}/${mod.id}_${mod.key}/index.html`);
+  console.log(`===============================================================\n`);
+
+  const cmd = `npx playwright test ${mod.file} --project=${targetEnv} --reporter=html:${reportFolder} --grep-invert "OTP"`;
+
   try {
-    execSync(command, { stdio: 'inherit', cwd: __dirname });
-    console.log(`\n [SUCCESS] Report generated at: ${reportFolder}\\index.html\n`);
-  } catch (error) {
-    console.log(`\n [NOTE] Tests completed with some results logged in: ${reportFolder}\\index.html\n`);
+    execSync(cmd, { stdio: 'inherit', cwd: __dirname });
+    console.log(`\n [SUCCESS] ${mod.name} passed completely! Report saved.\n`);
+  } catch (err) {
+    console.log(`\n [FINISHED] ${mod.name} finished. Check report at ${reportFolder}\\index.html\n`);
   }
 }
 
-if (moduleArg === 'all') {
-  console.log(`Running all modules sequentially for [${envArg}] with individual reports...`);
-  for (const modKey of Object.keys(MODULES)) {
-    runModule(modKey, envArg);
+if (targetInput === 'all') {
+  console.log(`\nRunning all 13 modules sequentially for [${env.toUpperCase()}]...\n`);
+  for (const m of MODULES) {
+    runSingle(m, env);
   }
 } else {
-  runModule(moduleArg, envArg);
+  const match = MODULES.find(m => m.id === targetInput || m.key.toLowerCase() === targetInput.toLowerCase());
+  if (!match) {
+    console.error(`Unknown module "${targetInput}".`);
+    console.log('Available modules: 1 to 13 or: ' + MODULES.map(m => m.key).join(', '));
+    process.exit(1);
+  }
+  runSingle(match, env);
 }
