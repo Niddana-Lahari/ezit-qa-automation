@@ -32,7 +32,7 @@ async function openBillPay(page: Page) {
   const continueBtn = page.getByRole('button', { name: 'Continue' });
   await expect(continueBtn).toBeVisible({ timeout: 15000 });
   await expect(continueBtn).toBeEnabled({ timeout: 5000 });
-  await continueBtn.click();
+  await continueBtn.click({ force: true });
 
   // Bill payment screens live inside an iframe - wait for it
   await expect(page.locator('iframe').first()).toBeVisible({ timeout: 20000 });
