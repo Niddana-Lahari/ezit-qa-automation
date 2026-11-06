@@ -60,7 +60,13 @@ export async function loginToEzit(
   const modalDismissButtons = page.getByRole('button', { name: /No Thanks|Dismiss|Close|Not Now|Later/i }).or(
     page.locator('.modal-footer button, button.btn-close, .modal .close')
   );
-  if (await modalDismissButtons.first().isVisible({ timeout: 2500 }).catch(() => false)) {
-    await modalDismissButtons.first().click().catch(() => {});
+  for (let i = 0; i < 3; i++) {
+    const noThanks = page.getByRole('button', { name: 'No Thanks' }).or(page.getByRole('button', { name: /Dismiss|Close/i }));
+    if (await noThanks.first().isVisible({ timeout: 2500 }).catch(() => false)) {
+      await noThanks.first().click({ force: true }).catch(() => {});
+      await page.waitForTimeout(500);
+    } else {
+      break;
+    }
   }
 }
