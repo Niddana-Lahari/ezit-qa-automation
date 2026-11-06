@@ -6,7 +6,8 @@ export async function loginToEzit(
   mobile: string = process.env.TEST_MOBILE || '',
   customPassword?: string
 ): Promise<void> {
-  // 1. Choose password from env or custom parameter
+  // 1. Choose password
+  page.addLocatorHandler(page.getByRole('button', { name: 'No Thanks' }), async (btn) => { await btn.click(); });
   let password = customPassword || process.env.TEST_PASSWORD || '';
 
   // 2. Navigate to Home/Login

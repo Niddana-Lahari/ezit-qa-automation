@@ -13,6 +13,10 @@ export default defineConfig({
   workers: 1,
   reporter: [['html', { open: 'never' }]],
   use: {
+    permissions: [],
+    launchOptions: {
+      args: ['--deny-permission-prompts']
+    },
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
     // Use Edge on local Windows; use standard Chromium in CI (Linux)
