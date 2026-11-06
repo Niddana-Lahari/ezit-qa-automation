@@ -114,13 +114,20 @@ test.describe('Services Module - Raise a Query', () => {
     await page.waitForTimeout(1000);
 
     // 7. Select Priority dropdown if present
-    const prioritySelect = page.locator('select[name="queryUrgency"], select').last();
-    if (await prioritySelect.isVisible({ timeout: 4000 }).catch(() => false)) {
-      await prioritySelect.selectOption({ index: 1 }).catch(() => {});
+    const prioritySelect = page.locator('select').last();
+    if (await prioritySelect.isVisible({ timeout: 5000 }).catch(() => false)) {
+      // Select option by value or index
+      await prioritySelect.selectOption({ index: 1 }).catch(async () => {
+        await prioritySelect.selectOption({ label: 'Normal' }).catch(async () => {
+          await prioritySelect.selectOption({ label: 'Normal Priority' }).catch(() => {});
+        });
+      });
+      await prioritySelect.dispatchEvent('change').catch(() => {});
     }
 
-    // 8. Submit the Query form
-    const submitBtn = page.getByRole('button', { name: /Submit|Continue|Proceed/i }).first();
+    // Scroll down to reveal Submit button if occluded
+    const submitBtn = page.getByRole('button', { name: 'Submit' }).or(page.locator('button:has-text("Submit")')).first();
+    await submitBtn.scrollIntoViewIfNeeded().catch(() => {});
     await expect(submitBtn).toBeVisible({ timeout: 10000 });
     await submitBtn.click({ force: true });
 
