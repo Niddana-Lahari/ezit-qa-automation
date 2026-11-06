@@ -6,6 +6,13 @@ export async function loginToEzit(
   mobile: string = process.env.TEST_MOBILE || '',
   customPassword?: string
 ): Promise<void> {
+  // Global listener for Enable Notifications popup across ALL pages
+  try {
+    page.addLocatorHandler(page.getByRole('button', { name: 'No Thanks' }), async (btn) => {
+      await btn.click({ force: true });
+    });
+  } catch (e) {}
+
   // 1. Choose password
   page.addLocatorHandler(page.getByRole('button', { name: 'No Thanks' }), async (btn) => { await btn.click(); });
   let password = customPassword || process.env.TEST_PASSWORD || '';
