@@ -24,7 +24,9 @@
     "report:coverage:dev": "node run_module_report.js coverage dev",
     "report:coverage:prod": "node run_module_report.js coverage prod",
     "report:all:dev": "node run_module_report.js all dev",
-    "report:all:prod": "node run_module_report.js all prod"
+    "report:all:prod": "node run_module_report.js all prod",
+    "report:login:dev": "node run_module_report.js auth dev",
+    "report:login:prod": "node run_module_report.js auth prod"
   },
   "repository": {
     "type": "git",
