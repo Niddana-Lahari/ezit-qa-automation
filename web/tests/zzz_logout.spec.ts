@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginToEzit } from '../../utils/loginHelper';
+import { loginToEzit } from '../utils/loginHelper';
 
 
 test.describe('Authentication - Logout Flow', () => {
