@@ -11,8 +11,11 @@ async function openBillPay(page: Page) {
     .or(page.getByRole('link', { name: /Bill Pay/i }))
     .first();
 
+  const noThanksBtn = page.getByRole('button', { name: 'No Thanks' });
+  if (await noThanksBtn.isVisible({ timeout: 3000 }).catch(() => false)) { await noThanksBtn.click().catch(() => {}); }
   await expect(billPayNav).toBeVisible({ timeout: 15000 });
   await billPayNav.click();
+  if (await noThanksBtn.isVisible({ timeout: 2000 }).catch(() => false)) { await noThanksBtn.click().catch(() => {}); }
 
   // If an M-PIN screen is shown (same as Secure Vault), fill it first
   const mpinChar1 = page.getByRole('textbox', { name: 'Please enter OTP character 1' });
