@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EZIT Web Test Automation Scripts Catalog</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 40px; max-width: 1050px; margin: auto; background: #ffffff; color: #1e293b; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 13.5px; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 12px; }
+    tr:nth-child(even) td { background-color: #f8fafc; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: Consolas, monospace; }
+    @media print {
+      body { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+<h1 style="color:#0f172a; border-bottom:2px solid #2563eb; padding-bottom:8px; margin-top:20px;">EZIT Platform - Web Test Automation Scripts Catalog & Documentation</h1>
+<p style="line-height:1.6; color:#334155; margin:8px 0;"><strong>Repository:</strong> <a href="https://github.com/Niddana-Lahari/ezit-qa-automation" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;">github.com/Niddana-Lahari/ezit-qa-automation</a></p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;"><strong>Branch:</strong> <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">testing-ezit</code></p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;"><strong>Test Framework:</strong> Playwright (TypeScript)</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;"><strong>Target Application:</strong> EZIT Web Application (<code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">DEV</code> & <code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">PROD</code>)</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;"><strong>Execution Engine:</strong> Microsoft Edge / Chromium Headed & Headless</p>
+<hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;">
+<h2 style="color:#1e293b; border-bottom:1px solid #e2e8f0; padding-bottom:4px; margin-top:28px;">1. Quick Start & Execution Instructions</h2>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">1. <strong>Clone & Install Dependencies:</strong></p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">cd ezit-qa-automation/web</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">npm install</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">2. <strong>Configure Environment Variables (<code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">web/.env</code>):</strong></p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">TEST_MOBILE=6300558941</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">TEST_PASSWORD=Lahari@1234</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">TEST_MPIN=1234</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">3. <strong>Run All Web Tests:</strong></p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">npx playwright test --project=dev</p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">4. <strong>Run in Interactive UI Mode:</strong></p>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">npx playwright test --ui</p>
+<hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;">
+<h2 style="color:#1e293b; border-bottom:1px solid #e2e8f0; padding-bottom:4px; margin-top:28px;">2. Web Test Automation Scripts Catalog (By Module)</h2>
+<h3 style="color:#2563eb; margin-top:20px;">Module 1: Subscription & Pricing Plans</h3>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">Covers pricing tiers, corporate verification, and end-to-end sandbox Net Banking payments.</p>
+<table style="border-collapse:collapse; width:100%; margin:16px 0 24px; font-size:14px; border:1px solid #cbd5e1;"><thead><tr>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Case ID</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Scenario</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">File & Line Link</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Terminal Execution Command</th>
+</tr></thead><tbody>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PLAN_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">View current active plan details on Profile</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/subscription/subscriptionPlans.spec.ts#L100" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">subscriptionPlans.spec.ts#L100</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/subscription/subscriptionPlans.spec.ts -g "TC_PLAN_01"</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PLAN_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Corporate Plan email & employee ID verification flow</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/subscription/subscriptionPlans.spec.ts#L136" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">subscriptionPlans.spec.ts#L136</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/subscription/subscriptionPlans.spec.ts -g "TC_PLAN_02"</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PLAN_03</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Verify available subscription tiers & pricing cards</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/subscription/subscriptionPlans.spec.ts#L221" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">subscriptionPlans.spec.ts#L221</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/subscription/subscriptionPlans.spec.ts -g "TC_PLAN_03"</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PLAN_04</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Upgrade to Prime Plan via WorldLine Net Banking (DEV) / Dismiss (PROD)</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/subscription/subscriptionPlans.spec.ts#L245" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">subscriptionPlans.spec.ts#L245</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/subscription/subscriptionPlans.spec.ts -g "TC_PLAN_04" --project=dev --headed</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PLAN_05</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Upgrade to Basic Annual Plan via Net Banking (DEV) / Dismiss (PROD)</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/subscription/subscriptionPlans.spec.ts#L340" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">subscriptionPlans.spec.ts#L340</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/subscription/subscriptionPlans.spec.ts -g "TC_PLAN_05" --project=dev --headed</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PLAN_06</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Upgrade to Basic Plan via Net Banking (DEV) / Dismiss (PROD)</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/subscription/subscriptionPlans.spec.ts#L430" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">subscriptionPlans.spec.ts#L430</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/subscription/subscriptionPlans.spec.ts -g "TC_PLAN_06" --project=dev --headed</code></td>
+</tr>
+</tbody></table>
+<hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;">
+<h3 style="color:#2563eb; margin-top:20px;">Module 2: Services Module</h3>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">Covers end-to-end service requests, appointments, document uploads, and payment checkout.</p>
+<table style="border-collapse:collapse; width:100%; margin:16px 0 24px; font-size:14px; border:1px solid #cbd5e1;"><thead><tr>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Case ID</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Scenario</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">File & Line Link</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Terminal Execution Command</th>
+</tr></thead><tbody>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_SRV_SPEC_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Navigate and select Specialised Services</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/services/specialisedServices.spec.ts#L96" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">specialisedServices.spec.ts#L96</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/services/specialisedServices.spec.ts -g "TC_SRV_SPEC_01"</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_SRV_SPEC_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Specialised Service request creation & Net Banking payment</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/services/specialisedServices.spec.ts#L189" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">specialisedServices.spec.ts#L189</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/services/specialisedServices.spec.ts -g "TC_SRV_SPEC_02" --headed</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_SRV_QUERY_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Raise a Query creation with PDF document upload & checkout</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/services/raiseQuery.spec.ts#L54" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">raiseQuery.spec.ts#L54</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/services/raiseQuery.spec.ts -g "TC_SRV_QUERY_02" --headed</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_SRV_CONS_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Book a Consultation appointment & Net Banking checkout</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/services/bookConsultation.spec.ts#L61" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">bookConsultation.spec.ts#L61</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/services/bookConsultation.spec.ts -g "TC_SRV_CONS_02" --headed</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_SRV_CUST_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Custom Request creation & submission</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/services/customRequest.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">customRequest.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/services/customRequest.spec.ts</code></td>
+</tr>
+</tbody></table>
+<hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;">
+<h3 style="color:#2563eb; margin-top:20px;">Module 3: Authentication & Security Module</h3>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">Covers customer sign-in, sign-out, password creation/reset, and M-PIN management.</p>
+<table style="border-collapse:collapse; width:100%; margin:16px 0 24px; font-size:14px; border:1px solid #cbd5e1;"><thead><tr>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Case ID</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Scenario</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">File Link</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Terminal Execution Command</th>
+</tr></thead><tbody>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_AUTH_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Customer Login with valid credentials</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/auth/login.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">login.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/auth/login.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_AUTH_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Customer Logout verification</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/auth/logout.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">logout.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/auth/logout.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_RESET_MPIN_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Verify Reset M-PIN page navigation and screen elements</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/profile/resetMpin.spec.ts#L40" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">resetMpin.spec.ts#L40</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/profile/resetMpin.spec.ts -g "TC_RESET_MPIN_01"</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_RESET_MPIN_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Reset M-PIN flow with live SMS OTP verification</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/profile/resetMpin.spec.ts#L82" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">resetMpin.spec.ts#L82</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/profile/resetMpin.spec.ts -g "TC_RESET_MPIN_MANUAL_OTP" --headed</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_RESET_PWD_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Reset Password flow validation</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/profile/resetPassword.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">resetPassword.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/profile/resetPassword.spec.ts</code></td>
+</tr>
+</tbody></table>
+<hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;">
+<h3 style="color:#2563eb; margin-top:20px;">Module 4: Secure Vault & Portfolio Module</h3>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">Covers creation and verification of financial and physical assets in the vault.</p>
+<table style="border-collapse:collapse; width:100%; margin:16px 0 24px; font-size:14px; border:1px solid #cbd5e1;"><thead><tr>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Case ID</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Scenario</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">File Link</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Terminal Execution Command</th>
+</tr></thead><tbody>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_VAULT_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Asset creation and verification</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/vault/assetCreation.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">assetCreation.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/vault/assetCreation.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_VAULT_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Liability creation and verification</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/vault/liabilityCreation.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">liabilityCreation.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/vault/liabilityCreation.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_VAULT_03</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Transport asset creation and verification</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/vault/transportCreation.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">transportCreation.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/vault/transportCreation.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_VAULT_04</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Appliance asset creation and verification</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/vault/applianceCreation.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">applianceCreation.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/vault/applianceCreation.spec.ts</code></td>
+</tr>
+</tbody></table>
+<hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;">
+<h3 style="color:#2563eb; margin-top:20px;">Module 5: Bill Pay Module</h3>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">Covers utility bill management and service provider selection.</p>
+<table style="border-collapse:collapse; width:100%; margin:16px 0 24px; font-size:14px; border:1px solid #cbd5e1;"><thead><tr>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Case ID</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Scenario</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">File Link</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Terminal Execution Command</th>
+</tr></thead><tbody>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_BILL_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">View Electricity and Water bill tabs</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/billpay/billTabs.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">billTabs.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/billpay/billTabs.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_BILL_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Bill payment flow & provider navigation</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/billpay/billPay.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">billPay.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/billpay/billPay.spec.ts</code></td>
+</tr>
+</tbody></table>
+<hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;">
+<h3 style="color:#2563eb; margin-top:20px;">Module 6: Profile & Nominees Module</h3>
+<p style="line-height:1.6; color:#334155; margin:8px 0;">Covers user profile settings, account settings, and nominee assignments.</p>
+<table style="border-collapse:collapse; width:100%; margin:16px 0 24px; font-size:14px; border:1px solid #cbd5e1;"><thead><tr>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Case ID</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Test Scenario</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">File Link</th>
+<th style="border:1px solid #cbd5e1; padding:10px 12px; background:#f1f5f9; text-align:left; font-weight:600; color:#0f172a;">Terminal Execution Command</th>
+</tr></thead><tbody>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PROF_01</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">View Profile details & General Information</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/profile/generalInformation.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">generalInformation.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/profile/generalInformation.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PROF_02</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Nominee management & verification</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/profile/nominees.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">nominees.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/profile/nominees.spec.ts</code></td>
+</tr>
+<tr>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><strong>TC_PROF_03</strong></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;">Delete Account modal & validation flow</td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><a href="https://github.com/Niddana-Lahari/ezit-qa-automation/blob/testing-ezit/web/tests/profile/deleteAccount.spec.ts" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">deleteAccount.spec.ts</code></a></td>
+<td style="border:1px solid #cbd5e1; padding:9px 12px; color:#334155;"><code style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-family:Consolas, monospace; font-size:13px; color:#dc2626;">npx playwright test tests/profile/deleteAccount.spec.ts</code></td>
+</tr>
+</tbody></table>
+</body>
+</html>
