@@ -83,6 +83,7 @@ export async function handleOtp(page: Page, testInfo: TestInfo, bypassOtp: strin
     await otpScreenIndicator.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
 
     console.log(`>>> [SUCCESS] OTP screen verified! Manual entry skipped as configured in .env <<<\n`);
+    testInfo.skip(true, 'SKIP_MANUAL_OTP=true: OTP screen verified successfully, remaining post-OTP actions skipped.');
   } else {
     // ---- MANUAL OTP ENTRY MODE ----
     const envLabel = isStageEnv(page, testInfo) ? 'STAGE (REAL SMS MODE)' : 'DEV/PROD';
