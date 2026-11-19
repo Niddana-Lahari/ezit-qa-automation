@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { installNotificationHandler } from '../../utils/loginHelper';
 
 test.describe('Login & Logout Test Cases', () => {
 
   test.beforeEach(async ({ page }, testInfo) => {
+    await installNotificationHandler(page);
     await page.goto('/');
 
     if (testInfo.project.name === 'dev' || testInfo.project.name === 'stage') {

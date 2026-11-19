@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { handleOtp } from '../../utils/otpHelper';
+import { installNotificationHandler } from '../../utils/loginHelper';
 
 test.describe('Registration & Onboarding Test Suite', () => {
 
@@ -9,6 +10,7 @@ test.describe('Registration & Onboarding Test Suite', () => {
   const testEmail = process.env.TEST_CORPORATE_EMAIL || 'test.user@example.com';
 
   test.beforeEach(async ({ page }) => {
+    await installNotificationHandler(page);
     // Open website and wait for page to load
     await page.goto('/');
     await page.waitForLoadState('domcontentloaded');

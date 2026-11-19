@@ -1,20 +1,33 @@
 import { Page, TestInfo, expect } from '@playwright/test';
 
+/**
+ * Universal dismisser for "Enable Notifications" / "No Thanks" popup.
+ * Installs Playwright's native addLocatorHandler so that whenever
+ * "Enable Notifications" appears ANYWHERE at ANY TIME during ANY test,
+ * it automatically clicks "No Thanks" instantly!
+ */
+export async function installNotificationHandler(page: Page): Promise<void> {
+  try {
+    const noThanksBtn = page.getByRole('button', { name: /No Thanks/i })
+      .or(page.locator('button:has-text("No Thanks")'));
+
+    page.addLocatorHandler(noThanksBtn, async (btn) => {
+      console.log('>>> [AUTO-HANDLER] "Enable Notifications" popup detected! Automatically clicking "No Thanks" <<<');
+      await btn.click({ force: true }).catch(() => {});
+    });
+  } catch (e) {}
+}
+
 export async function loginToEzit(
   page: Page,
   testInfo: TestInfo,
   mobile: string = process.env.TEST_MOBILE || '',
   customPassword?: string
 ): Promise<void> {
-  // Global listener for Enable Notifications popup across ALL pages
-  try {
-    page.addLocatorHandler(page.getByRole('button', { name: 'No Thanks' }), async (btn) => {
-      await btn.click({ force: true });
-    });
-  } catch (e) {}
+  // Global listener for Enable Notifications popup across ALL pages and actions
+  await installNotificationHandler(page);
 
   // 1. Choose password
-  page.addLocatorHandler(page.getByRole('button', { name: 'No Thanks' }), async (btn) => { await btn.click(); });
   let password = customPassword || process.env.TEST_PASSWORD || '';
 
   // 2. Navigate to Home/Login
